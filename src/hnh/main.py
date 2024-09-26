@@ -5,6 +5,9 @@ from fastapi.templating import Jinja2Templates
 
 from random import choice
 from transformers import pipeline
+import io
+
+from src.hnh.utils import get_max_label
 
 app = FastAPI()
 
@@ -12,7 +15,7 @@ html = Jinja2Templates(directory="public")
 
 
 @app.get("/hello")
-def read_root():
+def read_root():    
     return {"Hello": "World"}
 
 @app.get("/")
@@ -31,7 +34,8 @@ async def create_upload_file(file: UploadFile):
     from PIL import Image
     img = Image.open(io.BytesIO(img)) # 이미지를 PIL dlalwlfh qusghks
     predictions = model(img)
-    return {"Hello": file.filename}
+    label = get_max_label(predictions)
+    return {"result": label}
 
 @app.get("/predict_hotdog")
 def predict_hotdog():
