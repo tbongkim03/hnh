@@ -1,4 +1,4 @@
-from hnh.utils import get_max_score
+from hnh.utils import get_max_label, get_max_label2, get_max_label3
 
 def test_max_p_label():
     p = [
@@ -6,5 +6,6 @@ def test_max_p_label():
         {'label': 'not hot dog', 'score':0.4}
     ]
 
-    r = get_max_score(p)
-    assert r == 'hot dog'
+    assert get_max_label(p)== "hot dog"
+    assert get_max_label2(p)== "hot dog"
+    assert get_max_label3(p)== "hot dog"
